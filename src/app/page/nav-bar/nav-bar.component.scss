@@ -1,0 +1,33 @@
+.nav-spacer {
+  flex: 1 1 auto;
+}
+
+.companyName {
+  font-size: larger;
+}
+
+.active-link {
+  background: #4a12ad;
+  color: white;
+}
+
+.main-sidepanel {
+  background-color: #5d07f56e;
+}
+
+.side-menu {
+  width: 150px;
+
+  div {
+    border-bottom: 1px solid #0000ff61;
+    padding: 10px;
+
+    a {
+      text-decoration: none;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      color: white;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+<div *ngIf="LoginUserDetail" class="profile">
+    <div>
+        <img class="profile-image" src="{{LoginUserDetail?.picture}}" />
+    </div>
+    <div class="userinfo">
+        <div class="name">{{LoginUserDetail?.name}}</div>
+        <div>Email: {{LoginUserDetail?.email}}</div>
+        <div class="logout">
+            <button mat-stroked-button color="primary" class="btn-block" (click)="signOut()">Logout <mat-icon>logout</mat-icon></button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+.profile {
+    padding: 10px;
+    margin: 10px 60px;
+}
+
+.profile-image {
+    height: 125px;
+    width: 125px;
+    border: 2px dashed #5211c7ab;
+    border-radius: 100%;
+}
+
+.userinfo {
+    margin: 10px;
+    .name {
+        font-size: xx-large;
+    }
+}
+
+.logout {
+    margin-top: 20px;
+    display: grid;
+    width: 50%;
+}

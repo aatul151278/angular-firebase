@@ -1,0 +1,49 @@
+<div *ngIf="!IsLogin" style="height: 90vh;">
+  <mat-toolbar color="primary">
+    <div fxShow="true" fxHide.gt-sm="true">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <a mat-button class="companyName" routerLink="/employee">
+      <span> Employee Management</span>
+    </a>
+    <span class="nav-spacer"></span>
+    <div fxShow="true" fxHide.lt-md="true">
+      <a mat-button routerLink="/employee" [ngClass]="{'active-link': currentPage == '/employee'}">
+        <mat-icon>supervisor_account</mat-icon> Employees
+      </a>
+      <a mat-button routerLink="/product" [ngClass]="{'active-link': currentPage == '/product'}">
+        <mat-icon>reorder</mat-icon> Products
+      </a>
+      <a mat-button routerLink="/profile" [ngClass]="{'active-link': currentPage == '/profile'}">
+        <mat-icon>account_circle</mat-icon> Profile
+      </a>
+    </div>
+  </mat-toolbar>
+  <mat-sidenav-container fxFlexFill class="example-container">
+    <mat-sidenav class="main-sidepanel" #sidenav fxLayout="column" mode="side" opened="false" fxHide.gt-sm="true">
+      <div fxLayout="column" class="side-menu">
+        <div [ngClass]="{'active-link': currentPage == '/employee'}">
+          <a routerLink="/employee" (click)="sidenav.toggle()">
+            <mat-icon>supervisor_account</mat-icon> Employees
+          </a>
+        </div>
+        <div [ngClass]="{'active-link': currentPage == '/product'}">
+          <a routerLink="/product" (click)="sidenav.toggle()">
+            <mat-icon>reorder</mat-icon><span> Products</span>
+          </a>
+        </div>
+        <div [ngClass]="{'active-link': currentPage == '/profile'}">
+          <a routerLink="/profile" (click)="sidenav.toggle()">
+            <mat-icon>account_circle</mat-icon> Profile
+          </a>
+        </div>
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content fxFlexFill>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+<router-outlet *ngIf="IsLogin" ></router-outlet>
