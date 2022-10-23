@@ -19,6 +19,10 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from 'src/environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore/';
 import { AngularFireFunctionsModule, REGION } from '@angular/fire/compat/functions';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 
 import { NgxUiLoaderModule } from "ngx-ui-loader";
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -55,6 +59,9 @@ import { EmployeeComponent } from './page/employee/employee.component';
     MatButtonModule,
     MatSidenavModule,
     MatGridListModule,
+    MatTabsModule,
+    MatTableModule,
+    MatPaginatorModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireFunctionsModule,

@@ -48,20 +48,31 @@ export class FirestoreDataService {
   }
 
   createEmployee = async (objEmployee: any) => {
-    const callable = this.fns.httpsCallable('employeefunctions/AddEmployee');
-    const resCreateEmployee = callable(objEmployee);
-    console.log(resCreateEmployee)
-    resCreateEmployee.subscribe(resVal => {
-      console.log("resVal", resVal)
-    })
+    return new Promise(async (resolve) => {
+      const callable = this.fns.httpsCallable('employeefunctions/AddEmployee');
+      const resCreateEmployee = callable(objEmployee);
+      resCreateEmployee.subscribe(resVal => {
+        return resolve(resVal);
+      })
+    });
   }
 
-  getEmployees = async (objEmployeeFilter: any) => {
-    const callable = this.fns.httpsCallable('employeefunctions/GetEmployee');
-    const resEmployees = callable(objEmployeeFilter);
-    console.log(resEmployees)
-    resEmployees.subscribe(resVal => {
-      console.log("resVal", resVal)
-    })
+  getEmployees = async (objEmployeeFilter: any): Promise<any> => {
+    return new Promise(async (resolve) => {
+      const callable = this.fns.httpsCallable('employeefunctions/GetEmployee');
+      const resEmployees = callable(objEmployeeFilter);
+      resEmployees.subscribe(resVal => {
+        return resolve(resVal);
+      });
+    });
+  }
+
+  deleteEmployee = async (uid: any): Promise<any> => {
+    return new Promise(async (resolve) => {
+      await this.firestore
+        .collection("Employee")
+        .doc(uid).delete();
+      return resolve(true);
+    });
   }
 }
