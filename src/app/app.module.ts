@@ -18,6 +18,8 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from 'src/environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore/';
+import { AngularFireFunctionsModule, REGION } from '@angular/fire/compat/functions';
+
 import { NgxUiLoaderModule } from "ngx-ui-loader";
 import { MatGridListModule } from '@angular/material/grid-list';
 import { SignInComponent } from './page/sign-in/sign-in.component';
@@ -55,9 +57,12 @@ import { EmployeeComponent } from './page/employee/employee.component';
     MatGridListModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
+    AngularFireFunctionsModule,
     AngularFirestoreModule
   ],
-  providers: [],
+  providers: [{
+    provide: REGION, useValue: "us-central1"
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

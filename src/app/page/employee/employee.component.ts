@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FirestoreDataService } from 'src/app/service/firestore-data.service';
 
 @Component({
   selector: 'app-employee',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeeComponent implements OnInit {
 
-  constructor() { }
+  constructor(public firestoreDataService: FirestoreDataService) { }
 
   ngOnInit(): void {
+
+    // // createEmployee
+    // this.firestoreDataService.createEmployee({
+    //   "Name": "AAss P",
+    //   "Email": "Acss@gmail.com",
+    //   "CompanyName": "MM 1",
+    //   "PhoneNumber": "568553545"
+    // });
+
+
+  //   this.firestoreDataService.getEmployees({
+  //     "pageNo": 1,
+   //    "limit": 5
+   //  });
+
   }
 
 }

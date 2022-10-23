@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
+import { async } from '@angular/core/testing';
 
 import { AngularFirestore } from "@angular/fire/compat/firestore/";
-
+import { AngularFireFunctions } from '@angular/fire/compat/functions';
 @Injectable({
   providedIn: 'root'
 })
 export class FirestoreDataService {
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore, private fns: AngularFireFunctions) { }
 
   saveUser = async (objUser: any) => {
     if (objUser.isNewUser) {
@@ -44,5 +45,23 @@ export class FirestoreDataService {
         return resolve(null);
       }
     });
+  }
+
+  createEmployee = async (objEmployee: any) => {
+    const callable = this.fns.httpsCallable('employeefunctions/AddEmployee');
+    const resCreateEmployee = callable(objEmployee);
+    console.log(resCreateEmployee)
+    resCreateEmployee.subscribe(resVal => {
+      console.log("resVal", resVal)
+    })
+  }
+
+  getEmployees = async (objEmployeeFilter: any) => {
+    const callable = this.fns.httpsCallable('employeefunctions/GetEmployee');
+    const resEmployees = callable(objEmployeeFilter);
+    console.log(resEmployees)
+    resEmployees.subscribe(resVal => {
+      console.log("resVal", resVal)
+    })
   }
 }
