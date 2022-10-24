@@ -32,13 +32,17 @@
 
                     <!-- Row shown when there is no matching data. -->
                     <tr class="mat-row" *matNoDataRow>
-                        <td class="mat-cell" colspan="4">No data</td>
+                        <td class="mat-cell" colspan="5">No data</td>
                     </tr>
 
                     <ng-container matColumnDef="Action">
                         <th mat-header-cell *matHeaderCellDef>Action</th>
+
                         <td mat-cell *matCellDef="let row">
-                            <button title="Delete Order" mat-button (click)="deleteEmployee(row.id)">
+                            <button title="Edit Employee" color="primary" mat-button (click)="editEmployee(row)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <button title="Delete Employee" color="warn" mat-button (click)="deleteEmployee(row.id)">
                                 <mat-icon>delete</mat-icon>
                             </button>
                         </td>
@@ -56,26 +60,80 @@
         <div class="mat-elevation-z8">
             <div class="emp-form-dom">
                 <form class="employee-form" [formGroup]="empForm">
+                    <mat-form-field appearance="fill" *ngIf="empForm.value.id">
+                        <mat-label>ID</mat-label>
+                        <input matInput readonly name="id" formControlName="id" autocomplete="off">
+                    </mat-form-field>
                     <mat-form-field appearance="fill">
                         <mat-label>Name</mat-label>
                         <input matInput name="Name" formControlName="Name" autocomplete="off">
                     </mat-form-field>
+                    <div *ngIf="isFieldValidate('Name')" class="alert error-div">
+                        <mat-error *ngIf="empForm.controls['Name'].errors.required">
+                            Please enter Name
+                        </mat-error>
+                        <mat-error *ngIf="empForm.controls['Name'].errors.minlength">
+                            Please enter minimum {{empForm.controls['Name'].errors.minlength.requiredLength}}
+                            character.
+                        </mat-error>
+                        <mat-error *ngIf="empForm.controls['Name'].errors.maxlength">
+                            Please enter only {{empForm.controls['Name'].errors.maxlength.requiredLength}}
+                            character.
+                        </mat-error>
+                        <mat-error *ngIf="empForm.controls['Name'].errors.pattern">
+                            Please enter only alphabet
+                        </mat-error>
+                    </div>
                     <mat-form-field appearance="fill">
                         <mat-label>Email</mat-label>
                         <input matInput name="Email" formControlName="Email" autocomplete="off">
                     </mat-form-field>
+                    <div *ngIf="isFieldValidate('Email')" class="alert error-div">
+                        <mat-error *ngIf="empForm.controls['Email'].errors.required">
+                            Please enter Email
+                        </mat-error>
+                        <mat-error *ngIf="empForm.controls['Email'].errors.email">
+                            Please enter Valid Email
+                        </mat-error>
+                    </div>
                     <mat-form-field appearance="fill">
-                        <mat-label>CompanyName</mat-label>
+                        <mat-label>Company Name</mat-label>
                         <input matInput name="CompanyName" formControlName="CompanyName" autocomplete="off">
                     </mat-form-field>
+                    <div *ngIf="isFieldValidate('CompanyName')" class="alert error-div">
+                        <mat-error *ngIf="empForm.controls['CompanyName'].errors.required">
+                            Please enter Company Name
+                        </mat-error>
+                    </div>
                     <mat-form-field appearance="fill">
-                        <mat-label>PhoneNumber</mat-label>
+                        <mat-label>Phone Number</mat-label>
                         <input matInput name="PhoneNumber" formControlName="PhoneNumber" autocomplete="off">
                     </mat-form-field>
+                    <div *ngIf="isFieldValidate('PhoneNumber')" class="alert error-div">
+                        <mat-error *ngIf="empForm.controls['PhoneNumber'].errors.required">
+                            Please enter Phone Number
+                        </mat-error>
+                        <mat-error *ngIf="empForm.controls['PhoneNumber'].errors.pattern">
+                            Please enter Valid Phone Number
+                        </mat-error>
+                        <mat-error *ngIf="empForm.controls['PhoneNumber'].errors.minlength">
+                            Please enter {{empForm.controls['PhoneNumber'].errors.minlength.requiredLength}}
+                            digit number.
+                        </mat-error>
+                        <mat-error *ngIf="empForm.controls['PhoneNumber'].errors.maxlength">
+                            Please enter only {{empForm.controls['PhoneNumber'].errors.maxlength.requiredLength}}
+                            digit number.
+                        </mat-error>
+                    </div>
                     <div class="button-dom">
-                        <button mat-button mat-raised-button color="primary" [disabled]="!empForm.valid"
-                            (click)="SaveEmployee()">Add Employee</button>
-                        <button mat-button mat-raised-button color="warn" (click)="resetEmployeeForm()">Reset</button>
+                        <button mat-button *ngIf="!empForm.value.id" mat-raised-button color="primary" [disabled]="!empForm.valid"
+                            (click)="SaveEmployee()">
+                            Add Employee
+                        </button>
+                        <button mat-button mat-raised-button color="warn" (click)="resetEmployeeForm()"
+                            type="button">
+                            Reset
+                        </button>
                     </div>
                 </form>
             </div>
