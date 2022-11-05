@@ -11,7 +11,8 @@ export const environment = {
     storageBucket: "callable-functions-714e7.appspot.com",
     messagingSenderId: "463674103987",
     appId: "1:463674103987:web:87feb9659595fca75878c6"
-  }
+  },
+  webUrl:"https://callable-functions-714e7.web.app/"
 };
 
 /*

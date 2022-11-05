@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guard/auth.guard';
+import { CkeditorPageComponent } from './page/ckeditor-page/ckeditor-page.component';
 import { EmployeeComponent } from './page/employee/employee.component';
 import { ProductComponent } from './page/product/product.component';
 import { ProfileComponent } from './page/profile/profile.component';
@@ -30,6 +31,11 @@ const routes: Routes = [
     path: 'product',
     canActivate: [AuthGuard],
     component: ProductComponent,
+  },
+  {
+    path: 'ck-editor',
+    canActivate: [AuthGuard],
+    component: CkeditorPageComponent,
   },
   {
     path: '**',

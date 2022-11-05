@@ -22,15 +22,17 @@ import { AngularFireFunctionsModule, REGION } from '@angular/fire/compat/functio
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
-
 import { NgxUiLoaderModule } from "ngx-ui-loader";
 import { MatGridListModule } from '@angular/material/grid-list';
+import { CKEditorModule } from 'ckeditor4-angular';
+
 import { SignInComponent } from './page/sign-in/sign-in.component';
 import { NavBarComponent } from './page/nav-bar/nav-bar.component';
 import { ProductComponent } from './page/product/product.component';
 import { ProfileComponent } from './page/profile/profile.component';
 import { EmployeeComponent } from './page/employee/employee.component';
+import { CkeditorPageComponent } from './page/ckeditor-page/ckeditor-page.component';
+import { CustomStarRatingComponent } from './components/custom-star-rating/custom-star-rating.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { EmployeeComponent } from './page/employee/employee.component';
     ProductComponent,
     ProfileComponent,
     EmployeeComponent,
+    CkeditorPageComponent,
+    CustomStarRatingComponent,
 
   ],
   imports: [
@@ -65,7 +69,8 @@ import { EmployeeComponent } from './page/employee/employee.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireFunctionsModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    CKEditorModule
   ],
   providers: [{
     provide: REGION, useValue: "us-central1"

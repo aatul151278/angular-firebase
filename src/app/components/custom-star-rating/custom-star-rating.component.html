@@ -1,0 +1,9 @@
+<div class="rating-dom">
+    <div>Your Rating: </div>
+    <div>
+    <button mat-icon-button color="accent" *ngFor="let ratingId of ratings;index as i" (click)="onSelectStart(i+1)">
+        <mat-icon>
+            {{givenrating >= i+1 ? 'star':'star_border'}}
+        </mat-icon>
+    </button></div>
+</div>

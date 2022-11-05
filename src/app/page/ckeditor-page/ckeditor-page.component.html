@@ -1,0 +1,123 @@
+<div class="container">
+    <div class="form-container">
+        <div class="form-dom">
+            <h2>System Rating</h2>
+            <form [formGroup]="systemRatingForm">
+                <mat-form-field appearance="fill">
+                    <mat-label>Name</mat-label>
+                    <input matInput name="Name" formControlName="Name" autocomplete="off">
+                </mat-form-field>
+                <div
+                    *ngIf="systemRatingForm.controls['Name'].invalid && (systemRatingForm.controls['Name'].dirty || systemRatingForm.controls['Name'].touched);">
+                    <mat-error *ngIf="systemRatingForm.controls['Name'].errors.required">
+                        Please enter Name
+                    </mat-error>
+                </div>
+
+                <div>
+                    <app-custom-star-rating [rating]="systemRatingForm.value.Rating"
+                        (onRatingChange)="onSystemRatingChanged($event)">
+                    </app-custom-star-rating>
+                </div>
+                <div class="buttons">
+                    <button mat-button mat-raised-button color="primary"
+                        [disabled]="!systemRatingForm.valid || !systemRatingForm.value.Rating"
+                        (click)="AddSystemRating()">
+                        Add +
+                    </button>
+                </div>
+                <div *ngIf="AllSystemRatings.length>0">
+                    <p>Ratings</p>
+                    <ul class="card-ul">
+                        <li class="cards" *ngFor="let systemR of AllSystemRatings">
+                            <div>{{systemR.Name}}</div>
+                            <div>{{systemR.Rating}}</div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+        <div class="form-dom">
+            <h2>Wall Rating</h2>
+            <form [formGroup]="wallRatingForm">
+                <mat-form-field appearance="fill">
+                    <mat-label>Name</mat-label>
+                    <input matInput name="Name" formControlName="Name" autocomplete="off">
+                </mat-form-field>
+                <div
+                    *ngIf="wallRatingForm.controls['Name'].invalid && (wallRatingForm.controls['Name'].dirty || wallRatingForm.controls['Name'].touched);">
+                    <mat-error *ngIf="wallRatingForm.controls['Name'].errors.required">
+                        Please enter Name
+                    </mat-error>
+                </div>
+                <div>
+                    <app-custom-star-rating [rating]="wallRatingForm.value.Rating"
+                        (onRatingChange)="onWallRatingChanged($event)">
+                    </app-custom-star-rating>
+                </div>
+                <div class="buttons">
+                    <button mat-button mat-raised-button color="primary"
+                        [disabled]="!wallRatingForm.valid  || !wallRatingForm.value.Rating" (click)="AddWallRating()">
+                        Add +
+                    </button>
+                </div>
+                <div *ngIf="AllWallRatings.length>0">
+                    <p>Ratings</p>
+                    <ul class="card-ul">
+                        <li class="cards" *ngFor="let wallR of AllWallRatings">
+                            <div>{{wallR.Name}}</div>
+                            <div>{{wallR.Rating}}</div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="ckeditor-table-container">
+        <div>
+            <div class="table-actions">
+                <div>
+                    <h2>Ckeditor-Table</h2>
+                </div>
+                <div *ngIf="AllWallRatings.length>0 || AllSystemRatings.length>0">
+                    <button mat-button mat-raised-button color="accent" (click)="AddtoCkEditor()">
+                        + Add Table to Ckeditor
+                    </button>
+                    <button mat-button mat-raised-button color="accent" (click)="AddtoCkEditor()">
+                        <mat-icon>
+                            refresh
+                        </mat-icon>
+                        Refresh Table
+                    </button>
+                </div>
+            </div>
+            <ckeditor [data]="ckeditorContent"></ckeditor>
+            <div style="display: none;" #ckeditortable>
+                <table style="border: 1px solid white; border-collapse: collapse;border:1px solid black;">
+                    <thead>
+                        <tr>
+                            <th colspan="2" style="border:1px solid black;background-color: #96D4D4;">Systems</th>
+                            <th colspan="2" style="border:1px solid black;background-color: #96D4D4;">Walls</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let allrating of AllCombineRatings">
+                            <td style="border:1px solid black;width:70px">
+                                <span *ngFor="let i of allrating.sys_Ratting">
+                                    <img style="height:10px;" src="{{webUrl}}assets/star-icon.png" />
+                                </span>
+                            </td>
+                            <td style="border:1px solid black;width:200px">{{allrating.sys_name}}</td>
+                            <td style="border:1px solid black;width:70px">
+                                <span *ngFor="let i of allrating.wall_Ratting">
+                                    <img style="height:10px;" src="{{webUrl}}assets/star-icon.png" />
+                                </span>
+                            </td>
+                            <td style="border:1px solid black;width:200px">{{allrating.wall_name}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

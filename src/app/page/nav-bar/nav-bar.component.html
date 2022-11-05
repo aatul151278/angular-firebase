@@ -13,6 +13,9 @@
       <a mat-button routerLink="/employee" [ngClass]="{'active-link': currentPage == '/employee'}">
         <mat-icon>supervisor_account</mat-icon> Employees
       </a>
+      <a mat-button routerLink="/ck-editor" [ngClass]="{'active-link': currentPage == '/ck-editor'}">
+        <mat-icon>assignment</mat-icon> Ckeditor-Table
+      </a>
       <a mat-button routerLink="/product" [ngClass]="{'active-link': currentPage == '/product'}">
         <mat-icon>reorder</mat-icon> Products
       </a>
@@ -27,6 +30,11 @@
         <div [ngClass]="{'active-link': currentPage == '/employee'}">
           <a routerLink="/employee" (click)="sidenav.toggle()">
             <mat-icon>supervisor_account</mat-icon> Employees
+          </a>
+        </div>
+        <div [ngClass]="{'active-link': currentPage == '/ck-editor'}">
+          <a routerLink="/ck-editor" (click)="sidenav.toggle()">
+            <mat-icon>assignment</mat-icon> Ckeditor-Table
           </a>
         </div>
         <div [ngClass]="{'active-link': currentPage == '/product'}">
